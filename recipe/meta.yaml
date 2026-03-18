@@ -1,5 +1,5 @@
 {% set name = "sops" %}
-{% set version = "3.12.1" %}
+{% set version = "3.12.2" %}
 
 package:
   name: go-{{ name|lower }}
@@ -8,7 +8,7 @@ package:
 source:
   - folder: src
     url: https://github.com/getsops/{{ name }}/archive/refs/tags/v{{ version }}.tar.gz
-    sha256: 90f9cdc55e653f3c40986cb288f50bd44b6277b7d329714f7a2a1bad6bc97074
+    sha256: 24b1f23a677535d1e06b63f8b4f7793d4f325b86c5454724fac90f5e73903e26
 
 build:
   number: 0
