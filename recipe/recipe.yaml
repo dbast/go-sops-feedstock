@@ -1,0 +1,53 @@
+context:
+  name: sops
+  version: "3.13.1"
+
+package:
+  name: go-${{ name|lower }}
+  version: ${{ version }}
+
+source:
+  - target_directory: src
+    url: https://github.com/getsops/${{ name }}/archive/refs/tags/v${{ version }}.tar.gz
+    sha256: 60408fa04a024328e6142c7dc67d08810a470aaa440b9f6cb7b3a358359636e9
+
+build:
+  number: 1
+  script:
+    - cd src
+    - go mod tidy
+    - go-licenses save . --save_path ../library_licenses
+    - if: not win
+      then:
+        - go build -v -o $PREFIX/bin/sops ./cmd/sops
+        # Clear out cache to avoid file not removable warnings
+        - chmod -R u+w $(go env GOPATH) && rm -r $(go env GOPATH)
+      else:
+        - go build -v -o %LIBRARY_BIN%\sops.exe .\cmd\sops
+
+requirements:
+  build:
+    - ${{ compiler('go-nocgo') }} >=1.22.7
+    - go-licenses
+
+tests:
+  - script:
+      - if: not win
+        then: which sops
+        else: where sops
+      - sops --help
+
+about:
+  homepage: https://github.com/getsops/sops/
+  license: MPL-2.0
+  license_file:
+    - src/LICENSE
+    - library_licenses/
+  summary: sops manages JSON, YAML and BINARY documents to be encrypted or decrypted.
+  description: |
+    SOPS is an editor of encrypted files that supports YAML, JSON, ENV, INI and BINARY formats and encrypts with AWS KMS, GCP KMS, Azure Key Vault, age, and PGP.
+
+extra:
+  recipe-maintainers:
+    - xhochy
+    - fhoehle
