@@ -11,7 +11,6 @@ Summary: sops manages JSON, YAML and BINARY documents to be encrypted or decrypt
 
 SOPS is an editor of encrypted files that supports YAML, JSON, ENV, INI and BINARY formats and encrypts with AWS KMS, GCP KMS, Azure Key Vault, age, and PGP.
 
-
 Current build status
 ====================
 
