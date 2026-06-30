@@ -1,6 +1,6 @@
 context:
   name: sops
-  version: "3.13.1"
+  version: "3.13.2"
 
 package:
   name: go-${{ name|lower }}
@@ -9,10 +9,10 @@ package:
 source:
   - target_directory: src
     url: https://github.com/getsops/${{ name }}/archive/refs/tags/v${{ version }}.tar.gz
-    sha256: 60408fa04a024328e6142c7dc67d08810a470aaa440b9f6cb7b3a358359636e9
+    sha256: 79560b53814e20031d094a293d6c169314eaaf97efd6e95a6d765e61e881db2c
 
 build:
-  number: 1
+  number: 0
   script:
     - cd src
     - go mod tidy
